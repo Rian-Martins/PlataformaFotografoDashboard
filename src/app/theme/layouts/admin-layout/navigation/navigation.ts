@@ -91,7 +91,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Galeria',
         type: 'item',
         classes: 'nav-item',
-        url: '/cham-computadores',
+        url: '/galeria',
         icon: 'ant-design',
         target: true,
         external: true,

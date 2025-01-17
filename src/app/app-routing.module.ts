@@ -47,6 +47,13 @@ const routes: Routes = [
           import('./theme/shared/components/Eventos/criar-evento/criar-evento.component').then(
             (c) => c.CriarEventoComponent
           ),
+      },      
+      {
+        path: 'galeria',
+        loadComponent: () =>
+          import('./theme/shared/components/galeria/galeria/galeria.component').then(
+            (c) => c.GaleriaComponent
+          ),
       },
     ],
   },

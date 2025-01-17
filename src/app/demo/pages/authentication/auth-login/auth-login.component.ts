@@ -1,28 +1,46 @@
-// project import
 import { Component } from '@angular/core';
- import {RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-
-
-
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzAlertModule } from 'ng-zorro-antd/alert'; // Import para alertas
 
 @Component({
   selector: 'app-auth-login',
-   imports: [RouterModule,CommonModule, FormsModule], // Including FormsModule here
-  
+  standalone: true,
+  imports: [
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    NzProgressModule, // Módulo de progresso
+    NzAlertModule,    // Módulo de alerta
+  ],
   templateUrl: './auth-login.component.html',
-  styleUrl: './auth-login.component.scss'
+  styleUrls: ['./auth-login.component.scss'],
 })
 export class AuthLoginComponent {
-  isActive = false;
-
   email: string = '';
   senha: string = '';
-  relembrar: string = '';
   errorMessage: string = '';
+  loginInProgress: boolean = false;
+  loginSuccess: boolean | null = null;
+
+  // Opções de autenticação via terceiros
+  SignInOptions = [
+    {
+      image: 'assets/images/authentication/google.svg',
+      name: 'Google',
+    },
+    {
+      image: 'assets/images/authentication/twitter.svg',
+      name: 'Twitter',
+    },
+    {
+      image: 'assets/images/authentication/facebook.svg',
+      name: 'Facebook',
+    },
+  ];
 
   constructor(private authService: AuthService) {}
 
@@ -32,30 +50,23 @@ export class AuthLoginComponent {
       return;
     }
 
+    this.loginInProgress = true;
+    this.loginSuccess = null;
+    this.errorMessage = '';
+
     this.authService.login(this.email, this.senha).subscribe({
       next: (authData) => {
         console.log('Login bem-sucedido', authData);
-        this.authService.handleLoginSuccess(authData); // Para redirecionamento
+        this.authService.handleLoginSuccess(authData);
+        this.loginSuccess = true;
+        this.loginInProgress = false;
       },
       error: (err) => {
-        console.log('Erro ao fazer login:', err);
+        console.error('Erro ao fazer login:', err);
         this.errorMessage = 'Credenciais inválidas.';
+        this.loginSuccess = false;
+        this.loginInProgress = false;
       },
     });
   }
-
-  SignInOptions = [
-    {
-      image: 'assets/images/authentication/google.svg',
-      name: 'Google'
-    },
-    {
-      image: 'assets/images/authentication/twitter.svg',
-      name: 'Twitter'
-    },
-    {
-      image: 'assets/images/authentication/facebook.svg',
-      name: 'Facebook'
-    }
-  ];
 }
