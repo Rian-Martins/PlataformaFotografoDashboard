@@ -41,6 +41,12 @@ export class CriarEventoComponent implements OnInit {
     'Handebol',
   ];
 
+  Galerias: string[] = [
+    'Galeria Um',
+    'Galeria Dois',
+    'Galeria Três'
+  ];
+
   Estado: string[] = [
     'Acre',
     'Alagoas',

@@ -1,0 +1,40 @@
+<div class="container">      
+    <!-- Coluna Direita -->
+    <div class="component-container">
+      <div *ngIf="currentStep === 1" class="step">
+        <app-card cardTitle="Galerias">
+          <form [formGroup]="eventForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="eventType"> Evento da Galeria*</label>
+                <select id="eventType" formControlName="eventType">
+                  <option value="">Selecione...</option>
+                  <option *ngFor="let tiposEvento of TiposEvento" [value]="tiposEvento">{{ tiposEvento }}</option>
+                </select>
+              </div>
+  
+              <div class="form-group">
+                <label for="eventName">Nome da Galeria *</label>
+                <input type="text" id="eventName" formControlName="eventName" placeholder="Digite o nome do evento" />
+              </div>
+            </div>              
+          </form>
+        </app-card>
+        <button (click)="nextStep()">Próximo</button>
+      </div>
+  
+      <div *ngIf="currentStep === 2" class="step">
+
+        <div class="action-buttons">
+            <button (click)="previousStep()">Voltar</button>
+            <button [disabled]="!selectedPrice" (click)="nextStep()">Selecionar</button>
+          </div>
+        </div>              
+    </div>
+</div>
+       
+      
+      
+
+
+  

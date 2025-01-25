@@ -95,6 +95,16 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'ant-design',
         target: true,
         external: true,
+      },      
+      {
+        id: 'listarGaleria',
+        title: 'Listar Galerias',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/listarGaleria',
+        icon: 'ant-design',
+        target: true,
+        external: true,
       },
       {
         id: 'precos',

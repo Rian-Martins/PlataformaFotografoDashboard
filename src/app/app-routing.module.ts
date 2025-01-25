@@ -54,6 +54,13 @@ const routes: Routes = [
           import('./theme/shared/components/galeria/galeria/galeria.component').then(
             (c) => c.GaleriaComponent
           ),
+      },           
+      {
+        path: 'listarGaleria',
+        loadComponent: () =>
+          import('./theme/shared/components/galeria/listargaleria/listargaleria.component').then(
+            (c) => c.ListargaleriaComponent
+          ),
       },
     ],
   },
